@@ -5,7 +5,7 @@
 #
 # Set custom upgrade url
 #
-fw_setenv upgrade 'https://github.com/OpenIPC/builder/releases/download/latest/t31_lite_xiaomi-mjsxj03hl-nor.tgz'
+fw_setenv upgrade 'https://github.com/yingying77/builder/releases/download/latest/t31_ultimate_xiaomi-mjsxj03hl-nor.tgz'
 #
 #
 # Set custom majestic settings
@@ -19,14 +19,14 @@ cli -s .nightMode.lightMonitor true
 cli -s .nightMode.minThreshold 10
 cli -s .nightMode.maxThreshold 100
 cli -s .video0.codec h264
-cli -s .onvif.enabled false
+cli -s .onvif.enabled true
 #
 #
 # Set wlan device and credentials if need
 #
 fw_setenv wlandev rtl8189fs-generic
-#fw_setenv wlanssid Router
-#fw_setenv wlanpass 12345678
+fw_setenv wlanssid TP-LINK_D00E
+fw_setenv wlanpass 71236925
 #
 #
 # Set osmem and rmem
