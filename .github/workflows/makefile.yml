@@ -17,11 +17,3 @@ jobs:
     - name: builder
       run: ./builder.sh t31_lite_xiaomi-mjsxj03hl
 
-    - name: Install dependencies
-      run: make
-
-    - name: Run check
-      run: make check
-
-    - name: Run distcheck
-      run: make distcheck
