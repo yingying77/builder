@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - t31_lite_xiaomi-mjsxj03hl
+          - t31_ultimate_xiaomi-mjsxj03hl
 
     steps:
       - name: Checkout source
