@@ -20,6 +20,14 @@ cli -s .nightMode.minThreshold 10
 cli -s .nightMode.maxThreshold 100
 cli -s .video0.codec h264
 cli -s .onvif.enabled true
+cli -s .audio.enabled true
+cli -s .audio.codec aac
+cli -s .audio.sampleRate 8000
+cli -s .audio.outputEnable true
+cli -s .audio.outputVolume 100
+cli -s .audio.speakerPin 63
+cli
+
 #
 #
 # Set wlan device and credentials if need
