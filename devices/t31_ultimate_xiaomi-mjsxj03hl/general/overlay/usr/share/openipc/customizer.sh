@@ -12,6 +12,8 @@ fw_setenv upgrade 'https://github.com/yingying77/builder/releases/download/lates
 #
 cli -s .system.plugins true
 cli -s .isp.blkCnt 1
+cli -s .isp.awbMode auto
+cli -s .isp.antiFlicker 60
 cli -s .nightMode.irCutPin1 49
 cli -s .nightMode.irCutPin2 50
 cli -s .nightMode.backlightPin 60
@@ -26,7 +28,6 @@ cli -s .audio.sampleRate 8000
 cli -s .audio.outputEnable true
 cli -s .audio.outputVolume 100
 cli -s .audio.speakerPin 63
-cli
 
 #
 #

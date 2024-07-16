@@ -1,0 +1,96 @@
+fw_setenv wlandev rtl8189fs-generic
+fw_setenv wlanssid TP-LINK_D00E
+fw_setenv wlanpass 71236925
+fw_setenv osmem 32M
+fw_setenv rmem 32M@0x2000000
+fw_setenv wlandev 8189fs
+gpio clear 54 ; mmcinfo
+gpio clear 54
+echo "INSERT" > /sys/devices/platform/jzmmc_v1.2.0/present
+
+fw_setenv osmem 32M
+fw_setenv rmem 32M@0x2000000
+
+10	小米安全芯片	out
+18	xq03p_reset 	out	0
+38	蓝色灯		out	1有效
+39	黄色灯		out	1有效
+47	mmc detect	in
+49	ircut1		out	脉冲
+50	ircut2		out	脉冲
+51	rest		in	按下0
+54	sd		out	0
+60	camera light		脉冲
+62			out
+63	speaker		out	1
+64			in
+
+
+
+
+		  xm	b    y	      c    c          sd     l
+setenv gpio_default 10O 18O 38o 39o 47I 49o 50o 51I 54o 60o 62O 63o 64i
+fw_setenv gpio_led_b 38
+fw_setenv gpio_led_y 39
+fw_setenv gpio_default_net
+setenv gpio_mmc_power 54o
+跳过17K
+umount /media/brook/
+fdisk /dev/sdb o n w
+mkfs.vfat /dev/sdb1
+dd if=u-boot-lzo-with-spl.bin of=/dev/sdb bs=512 seek=34 
+
+picocom -b 115200 /dev/ttyUSB0
+git config --global http.version HTTP/1.1
+
+
+gpio clear 54 ; mmcinfo
+
+mw.b 0x80600000 0xff 0x1000000
+fatload mmc 0:1 0x80600000 openipc-t31n-ultimate-16mb.bin
+fatload mmc 0:1 0x80600000 thingino-xiaomi_mjsxj03hl_t31n.bin
+sf probe 0
+sf erase 0x0 0x1000000;sf write 0x80600000 0x0 0x1000000
+
+setenv wlanssid TP-LINK_D00E
+setenv wlanpass 71236925
+setenv osmem 32M
+setenv rmem 32M@0x2000000
+setenv wlandev rtl8189fs-generic
+saveenv
+printenv
+reset
+
+firstboot
+
+cp -rv files/* /
+
+#小米安全芯片
+echo 10 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio10/direction
+
+echo 47 > /sys/class/gpio/export
+echo in > /sys/class/gpio/gpio47/direction
+
+Enter environment variables and save them:
+setenv baseaddr 0x80600000
+setenv flashsize 0x1000000
+saveenv
+Reassign ROM partitions according to the size and type of flash memory. Despite the fact that we have 16Mb of memory, using this layout in combination with the Lite version will allow us to get more free space.
+run setnor8m
+Flash boot (Commands are entered line by line!)
+mw.b 0x80600000 0xff 0x200000
+fatload mmc 0:1 0x80600000 uImage.t31n
+sf probe 0; sf lock 0;
+sf erase 0x50000 0x200000; sf write 0x80600000 0x50000 ${filesize}
+Flash rootfs (Commands are entered line by line!)
+mw.b 0x80600000 0xff 0x500000
+fatload mmc 0:1 0x80600000 rootfs.squashfs.t31n
+sf probe 0; sf lock 0;
+sf erase 0x250000 0x500000; sf write 0x80600000 0x250000 ${filesize}
+
+
+sox speech.mp3 -t raw -r 8000 -e signed -b 16 -c 1 test.pcm
+curl -u root:123456 --data-binary @test.pcm http://192.168.0.102/play_audio
+
+
