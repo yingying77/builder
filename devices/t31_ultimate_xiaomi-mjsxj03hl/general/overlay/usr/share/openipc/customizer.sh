@@ -5,7 +5,7 @@
 #
 # Set custom upgrade url
 #
-fw_setenv upgrade 'https://github.com/yingying77/builder/releases/download/latest/t31_ultimate_xiaomi-mjsxj03hl-nor.tgz'
+fw_setenv upgrade 'https://github.com/yingying77/builder/releases/download/latest/t31_lite_xiaomi-mjsxj03hl-nor.tgz'
 #
 #
 # Set custom majestic settings
@@ -43,4 +43,8 @@ fw_setenv wlanpass 71236925
 fw_setenv osmem 32M
 fw_setenv rmem 32M@0x2000000
 #
+cd /etc/init.d/
+chmod +x S00autoled S00resetbtn
+cd /user/sbin
+chmod +x autoled.sh led_control.sh resetd
 exit 0

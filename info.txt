@@ -108,27 +108,24 @@ sf probe 0;
 sf erase 0x0 0x50000; sf write 0x80600000 0x0 0x50000
 reset
 
-setenv rootmtd 10M
+setenv rootmtd 8M
 setenv rootaddr 0x250000
-setenv rootsize 0xA00000
+setenv rootsize 0x800000
 setenv kernsize 0x200000
 setenv osmem 32M
 setenv rmem 32M@0x2000000
+setenv wlandev rtl8189fs-generic
 setenv wlanssid TP-LINK_D00E
 setenv wlanpass 71236925
 saveenv
 
 
-mw.b 0x80600000 0xff 0x200000
-fatload mmc 0:1 0x80600000 uImage.t31
-sf probe 0; 
-sf erase 0x50000 0x200000; sf write 0x80600000 0x50000 ${filesize}
+mw.b 0x80600000 0xff 0x200000;fatload mmc 0:1 0x80600000 uImage.t31;
+sf probe 0; sf erase 0x50000 0x200000; sf write 0x80600000 0x50000 ${filesize}
 
-mw.b 0x80600000 0xff 0xa00000
-fatload mmc 0:1 0x80600000 rootfs.squashfs.t31
-sf probe 0;
-sf erase 0x250000 0xA00000; sf write 0x80600000 0x250000 ${filesize}
+mw.b 0x80600000 0xff 0x800000;fatload mmc 0:1 0x80600000 rootfs.squashfs.t31;
+sf probe 0;sf erase 0x250000 0x800000; sf write 0x80600000 0x250000 ${filesize}
 
-sf erase 0xc50000 0x3b0000
+sf erase 0xA50000 0x5b0000
 reset
 
