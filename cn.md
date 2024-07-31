@@ -24,3 +24,5 @@ sox speech.mp3 -t raw -r 8000 -e signed -b 16 -c 1 test.pcm
 curl -u root:123456 --data-binary @test.pcm http://192.168.0.102/play_audio
 
 ```
+
+### 配置
