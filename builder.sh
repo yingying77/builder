@@ -121,6 +121,7 @@ fi
 
 echo_c 33 "\nCopying device files"
 cp -afv ${BUILDER_DIR}/devices/${DEVICE}/*  ${FIRMWARE_DIR}
+chmod +x ${BUILDER_DIR}/devices/${DEVICE}/*
 
 echo_c 33 "\nBuilding the device"
 make BOARD=${DEVICE}

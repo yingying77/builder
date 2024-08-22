@@ -40,11 +40,12 @@ fw_setenv wlanpass 71236925
 #
 # Set osmem and rmem
 #
-fw_setenv osmem 32M
-fw_setenv rmem 32M@0x2000000
+fw_setenv osmem 34M
+fw_setenv rmem 30M@0x2200000
 #
+
 cd /etc/init.d/
 chmod +x S00autoled S00resetbtn
-cd /user/sbin
+cd /usr/sbin
 chmod +x autoled.sh led_control.sh resetd
 exit 0
