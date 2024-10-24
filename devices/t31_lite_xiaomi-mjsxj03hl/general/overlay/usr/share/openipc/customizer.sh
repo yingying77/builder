@@ -34,8 +34,8 @@ cli -s .audio.speakerPin 63
 # Set wlan device and credentials if need
 #
 fw_setenv wlandev rtl8189fs-generic
-fw_setenv wlanssid TP-LINK_D00E
-fw_setenv wlanpass 71236925
+fw_setenv wlanssid Ruijie-sCF5A
+fw_setenv wlanpass rongrong77
 #
 #
 # Set osmem and rmem
